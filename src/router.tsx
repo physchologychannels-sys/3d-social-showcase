@@ -7,6 +7,7 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
+    basepath: "/3d-social-showcase",
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
