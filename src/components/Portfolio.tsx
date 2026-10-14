@@ -25,9 +25,9 @@ const services = [
 const navItems = [{ label: "Work", id: "work" }, { label: "Services", id: "services" }, { label: "About", id: "about" }];
 
 class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
+  override state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() { return this.state.failed ? null : this.props.children; }
+  override render() { return this.state.failed ? null : this.props.children; }
 }
 
 function ContactForm() {
@@ -43,10 +43,10 @@ function ContactForm() {
   if (submitted) return <div role="status" className="flex flex-col items-start justify-center gap-5 py-8"><CheckCircle2 size={40} className="text-primary" /><h3 className="font-display text-3xl">Thanks for saying hello!</h3><p className="text-sm leading-7 text-hero-muted">Your demo inquiry is complete. This is a sample portfolio, so no message was sent or saved.</p><Button variant="hero" onClick={() => setSubmitted(false)}>Try another inquiry <ArrowRight /></Button></div>;
   return <form className="contact-form" onSubmit={handleSubmit} noValidate>
     <div className="form-pair">
-      <div><label htmlFor="name">Your name</label><input id="name" name="name" autoComplete="name" placeholder="Alex, Jamie, you…" aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />{errors.name && <p id="name-error" className="mt-2 text-xs text-primary">{errors.name[0]}</p>}</div>
-      <div><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} />{errors.email && <p id="email-error" className="mt-2 text-xs text-primary">{errors.email[0]}</p>}</div>
+      <div><label htmlFor="name">Your name</label><input id="name" name="name" autoComplete="name" placeholder="Alex, Jamie, you…" aria-invalid={!!errors["name"]} aria-describedby={errors["name"] ? "name-error" : undefined} />{errors["name"] && <p id="name-error" className="mt-2 text-xs text-primary">{errors["name"][0]}</p>}</div>
+      <div><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" aria-invalid={!!errors["email"]} aria-describedby={errors["email"] ? "email-error" : undefined} />{errors["email"] && <p id="email-error" className="mt-2 text-xs text-primary">{errors["email"][0]}</p>}</div>
     </div>
-    <label htmlFor="message">What are you dreaming up?</label><textarea id="message" name="message" placeholder="Tell me a little about your brand and what you have in mind…" aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} />{errors.message && <p id="message-error" className="mt-2 text-xs text-primary">{errors.message[0]}</p>}
+    <label htmlFor="message">What are you dreaming up?</label><textarea id="message" name="message" placeholder="Tell me a little about your brand and what you have in mind…" aria-invalid={!!errors["message"]} aria-describedby={errors["message"] ? "message-error" : undefined} />{errors["message"] && <p id="message-error" className="mt-2 text-xs text-primary">{errors["message"][0]}</p>}
     <div className="form-footer"><Button variant="hero" type="submit">Send inquiry <ArrowUpRight /></Button><span className="form-note">Demo only. No message is sent.</span></div>
   </form>;
 }
