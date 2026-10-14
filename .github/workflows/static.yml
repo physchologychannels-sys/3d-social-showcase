@@ -31,14 +31,13 @@ jobs:
           NITRO_PRESET: "static"
       - name: Prepare files
         run: |
-          OUT=$(dirname "$(find dist .output -name index.html -not -path '*/node_modules/*' | head -1)")
-          echo "Using $OUT"
+          OUT=dist/client
+          test -f "$OUT/index.html"
           cp "$OUT/index.html" "$OUT/404.html"
           touch "$OUT/.nojekyll"
-          echo "OUT=$OUT" >> $GITHUB_ENV
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.OUT }}
+          path: dist/client
       - id: deployment
         uses: actions/deploy-pages@v4
